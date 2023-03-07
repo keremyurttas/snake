@@ -1,26 +1,11 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="mx-auto w-screen h-screen bg-black p-10">
+    <h1 class="text-5xl mb-20 text-center text-success">Snake</h1>
+    <game-vue></game-vue>
+  </div>
 </template>
-
-<script>
-import HelloWorld from "./components/HelloWorld.vue";
-
-export default {
-  name: "App",
-  components: {
-    HelloWorld,
-  },
-};
+<script setup>
+import { defineComponent } from "vue";
+import gameVue from "./components/gameVue.vue";
+defineComponent(gameVue);
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
