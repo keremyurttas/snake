@@ -8,10 +8,13 @@ module.exports = {
       backgroundColor: {
         primary: "#0f0f17",
         success: "#29E75E",
+        alert: "#E72929",
+        boundary: "#272727",
       },
       colors: {
         success: "#29E75E",
       },
+      borderColor: { boundary: "#272727" },
     },
   },
   variants: {
