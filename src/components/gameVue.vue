@@ -44,11 +44,12 @@
           Play
         </button>
       </div>
+
       <div
         v-else
         :class="{
           'bg-success': cell == 'snake',
-          'bg-alert': cell == 'apple',
+          'bg-red-500': cell == 'apple',
         }"
         class="bg-primary text-white"
         :key="i"
@@ -72,7 +73,7 @@ const gameFinished = ref(false);
 onMounted(() => {
   placeSnake();
   placeApple();
-  gameIntervalID();
+  InitialInterval();
 });
 
 function playAgain() {
@@ -99,7 +100,7 @@ function placeSnake() {
   snakePosition.forEach((index) => (board.value[index] = "snake"));
 }
 
-function checkSneakIsEating() {
+function checkSneakIsEatingApple() {
   appleIndex === snakePosition[0] ? (feedSnake(), placeApple()) : "";
 }
 function feedSnake() {
@@ -115,7 +116,7 @@ function move() {
     snakePosition.unshift(snakePosition[0] + handleDirection());
     //[3,2,1]
     placeSnake();
-    checkSneakIsEating();
+    checkSneakIsEatingApple();
     checkSnakeIsEatingTail();
     checkBoundaries();
   }
@@ -132,7 +133,7 @@ function handleDirection() {
     : 0;
 }
 
-function gameIntervalID() {
+function InitialInterval() {
   const gameInterval = setInterval(() => {
     handleDirection(), move();
   }, 200);
@@ -144,7 +145,7 @@ function checkSnakeIsEatingTail() {
 }
 function showResult() {
   gameFinished.value = true;
-  clearInterval(gameIntervalID());
+  clearInterval(InitialInterval());
 }
 function checkBoundaries() {
   let head = snakePosition[0];
@@ -164,26 +165,27 @@ function checkBoundaries() {
 //Event listeners
 window.addEventListener("keydown", (e) => {
   let keyPressed = e.key;
+  keyPressed ? (firstPlay = false) : undefined;
   switch (keyPressed) {
     case "w":
     case "ArrowUp":
       direction !== "downward" ? (direction = "upward") : undefined;
-      firstPlay = false;
+
       break;
     case "s":
     case "ArrowDown":
       direction !== "upward" ? (direction = "downward") : undefined;
-      firstPlay = false;
+
       break;
     case "a":
     case "ArrowLeft":
       direction !== "right" ? (direction = "left") : undefined;
-      firstPlay = false;
+
       break;
     case "d":
     case "ArrowRight":
       direction !== "left" ? (direction = "right") : undefined;
-      firstPlay = false;
+
       break;
   }
 });
